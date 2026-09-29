@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Credenciales de conexión para MariaDB -->
+        <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mariadb://localhost:3306/db_universidad?useSSL=false&amp;serverTimezone=UTC</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">tu_contraseña_local</property>
+
+        <!-- Dialecto de SQL para MariaDB / MySQL -->
+        <property name="dialect">org.hibernate.dialect.MariaDBDialect</property>
+
+        <!-- Mostrar las consultas SQL en consola -->
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+
+        <!-- MAGIA DEL ORM: Crea/actualiza las tablas automáticamente -->
+        <property name="hbm2ddl.auto">update</property>
+
+        <!-- Registro de la entidad Cliente -->
+        <mapping class="com.grx.model.Cliente"/>
+    </session-factory>
+</hibernate-configuration>
