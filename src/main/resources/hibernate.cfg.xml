@@ -6,9 +6,9 @@
     <session-factory>
         <!-- Credenciales de conexión para MariaDB -->
         <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mariadb://localhost:3306/db_universidad?useSSL=false&amp;serverTimezone=UTC</property>
-        <property name="connection.username">root</property>
-        <property name="connection.password">tu_contraseña_local</property>
+        <property name="connection.url">jdbc:mariadb://localhost:3306/db_test?useSSL=false&amp;serverTimezone=UTC</property>
+        <property name="connection.username">user</property>
+        <property name="connection.password">12345</property>
 
         <!-- Dialecto de SQL para MariaDB / MySQL -->
         <property name="dialect">org.hibernate.dialect.MariaDBDialect</property>
@@ -21,6 +21,6 @@
         <property name="hbm2ddl.auto">update</property>
 
         <!-- Registro de la entidad Cliente -->
-        <mapping class="com.grx.model.Cliente"/>
+        <mapping class="com.grx.appWeb.model.Cliente"/>
     </session-factory>
 </hibernate-configuration>

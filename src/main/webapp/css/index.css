@@ -1,0 +1,103 @@
+ :root {
+     color-scheme: light;
+     font-family: "Segoe UI", Tahoma, sans-serif;
+     color: #183b35;
+     background: #f3f5ef;
+ }
+
+ * {
+     box-sizing: border-box;
+ }
+
+ body {
+     margin: 0;
+     min-height: 100vh;
+ }
+
+ header {
+     padding: 22px max(24px, calc((100% - 1040px) / 2));
+     background: #17483f;
+     color: #fff;
+ }
+
+ header p {
+     margin: 0;
+     font-size: 0.9rem;
+ }
+
+ main {
+     max-width: 1040px;
+     margin: 0 auto;
+     padding: 72px 24px;
+ }
+
+ h1 {
+     margin: 0 0 12px;
+     font-family: Georgia, "Times New Roman", serif;
+     font-size: clamp(2.2rem, 6vw, 4rem);
+     font-weight: 500;
+ }
+
+ .intro {
+     max-width: 620px;
+     margin: 0;
+     color: #52645e;
+     font-size: 1.1rem;
+     line-height: 1.6;
+ }
+
+ nav {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 14px;
+     margin-top: 38px;
+ }
+
+ .action {
+     display: inline-flex;
+     min-height: 52px;
+     align-items: center;
+     justify-content: center;
+     padding: 0 24px;
+     border: 0;
+     border-radius: 5px;
+     background: #167567;
+     color: #fff;
+     font-size: 1rem;
+     font-weight: 650;
+     text-decoration: none;
+ }
+
+ .action:hover,
+ .action:focus-visible {
+     background: #105b50;
+ }
+
+ .action-delete {
+     background: #bd5945;
+ }
+
+ .action-delete:hover,
+ .action-delete:focus-visible {
+     background: #963f30;
+ }
+
+ .action-edit {
+     background: #a56d19;
+ }
+
+ .action-edit:hover,
+ .action-edit:focus-visible {
+     background: #825411;
+ }
+
+ @media (max-width: 520px) {
+     main {
+         padding-top: 48px;
+     }
+
+     nav {
+         align-items: stretch;
+         flex-direction: column;
+     }
+ }
