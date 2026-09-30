@@ -53,6 +53,17 @@ p[role="status"] {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
+/* Sin mensaje: no se muestra el recuadro vacío */
+p[role="status"]:empty {
+    display: none;
+}
+
+/* Mensaje de error o aviso */
+p[role="status"].error {
+    color: #c0392b;
+    background-color: #fdecea;
+}
+
 /* Recuadro que contiene el formulario */
 form {
     background: #ffffff;
@@ -134,4 +145,45 @@ button[type="submit"]:active {
 
 .btn-volver:hover {
     background-color: #5a6268;
+}
+
+/* Espacio entre tarjetas apiladas (buscador, resultados, formulario) */
+form + form,
+ul + form,
+form + ul {
+    margin-top: 20px;
+}
+
+/* Campos de solo lectura (eliminar) */
+input[readonly] {
+    background-color: #f1f2f6;
+    color: #57606f;
+}
+
+/* Lista de coincidencias cuando hay varios clientes con el mismo nombre */
+ul {
+    list-style: none;
+    background: #ffffff;
+    padding: 12px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+ul li a {
+    display: block;
+    padding: 10px 14px;
+    border-radius: 8px;
+    color: #0984e3;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+ul li a:hover {
+    background-color: #f1f2f6;
 }
