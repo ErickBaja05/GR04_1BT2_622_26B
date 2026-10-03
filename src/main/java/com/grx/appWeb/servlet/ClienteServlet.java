@@ -12,8 +12,14 @@ import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.List;
 
+//El ClienteServlet.java está configurado para escuchar la ruta /clientes
+
 @WebServlet(name = "ClienteServlet", urlPatterns = "/clientes")
 public class ClienteServlet extends HttpServlet {
+
+    /*
+     * . Al recibir una petición POST, su método doPost entra en acción
+     */
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -23,6 +29,9 @@ public class ClienteServlet extends HttpServlet {
         if (accion == null || accion.isBlank()) {
             accion = "registrar";
         }
+
+        // El servlet extrae el valor del parámetro "accion", evalúa que se trata de por
+        // ejemplo "registrar", y llama al método privado registrarCliente()
 
         switch (accion) {
             case "registrar" -> registrarCliente(request, response);
@@ -44,6 +53,8 @@ public class ClienteServlet extends HttpServlet {
         }
     }
 
+    // Dentro de este método, se instancian los datos limpios en un nuevo objeto del
+    // Modelo: Cliente cliente = new Cliente(nombre.trim(), email.trim());
     private void registrarCliente(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         String nombre = request.getParameter("nombre");
@@ -55,6 +66,7 @@ public class ClienteServlet extends HttpServlet {
 
         Cliente cliente = new Cliente(nombre.trim(), email.trim());
         try {
+            // El Servlet transfiere el control a la capa de persistencia ejecutando:
             new ClienteDAO().guardarCliente(cliente);
         } catch (RuntimeException ex) {
             if (esEmailDuplicado(ex)) {
@@ -65,6 +77,20 @@ public class ClienteServlet extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "No se pudo guardar el cliente.");
             return;
         }
+
+        // Si el proceso es exitoso, el flujo vuelve al ClienteServlet.java, el cual
+        // finaliza el ciclo devolviendo al navegador una respuesta HTTP de redirección
+        // (response.sendRedirect(...)) hacia la ruta /registrarCliente?estado=ok
+
+        /*
+         * Esta redirección instruye al navegador a realizar una nueva petición GET
+         * pero esta vez enviando el parámetro de éxito en la
+         * URL. El JSP lee este parámetro mediante ${param.estado == 'ok'} y renderiza
+         * el mensaje verde: "Cliente guardado correctamente.". Este mecanismo se conoce
+         * como el patrón Post-Redirect-Get y es vital en aplicaciones web para evitar
+         * que, si el usuario refresca la página, el formulario POST se vuelva a enviar
+         * y se creen registros duplicados
+         */
 
         response.sendRedirect(request.getContextPath() + "/registrarCliente?estado=ok");
     }
@@ -190,7 +216,7 @@ public class ClienteServlet extends HttpServlet {
         for (Throwable causa = ex; causa != null; causa = causa.getCause()) {
             if (causa instanceof SQLException sqlException
                     && (sqlException.getErrorCode() == 1062
-                    || "23505".equals(sqlException.getSQLState()))) {
+                            || "23505".equals(sqlException.getSQLState()))) {
                 return true;
             }
         }

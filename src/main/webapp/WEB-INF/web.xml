@@ -5,7 +5,7 @@
                              https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
 
-    <display-name>GRXX_1BT2_622_26B App</display-name>
+    <display-name>GR04_1BT2_622_26B App</display-name>
 
     <!-- Página de bienvenida inicial por defecto -->
     <welcome-file-list>
